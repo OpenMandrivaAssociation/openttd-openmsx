@@ -1,7 +1,7 @@
 %define realname openmsx
 
 Name:           openttd-%{realname}
-Version:        0.2.1
+Version:        0.3.0
 Release:        %mkrel 1
 Summary:        OpenMSX music replacement set for OpenTTD
 
@@ -31,11 +31,6 @@ rm -rf %{buildroot}
 
 mkdir -p %{buildroot}%{_gamesdatadir}/openttd/gm
 %make install INSTALL_DIR=%{buildroot}%{_gamesdatadir}/openttd/gm
-
-# fix EOLs
-for f in docs/*.txt; do
-  dos2unix $f
-done
 
 %check
 %make check
