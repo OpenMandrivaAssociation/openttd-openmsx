@@ -1,14 +1,14 @@
 %define realname openmsx
 
 Name:           openttd-%{realname}
-Version:        0.3.0
+Version:        0.3.1
 Release:        %mkrel 1
 Summary:        OpenMSX music replacement set for OpenTTD
 
 Group:          Games/Strategy
 License:        GPLv2
 URL:            http://dev.openttdcoop.org/projects/openmsx
-Source0:        http://bundles.openttdcoop.org/%{realname}/releases/%{realname}-%{version}-source.tar.gz
+Source0:        http://bundles.openttdcoop.org/%{realname}/releases/%{version}/%{realname}-%{version}-source.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch:      noarch
 BuildRequires:  dos2unix
@@ -17,8 +17,7 @@ Conflicts:      openttd < 1.0.0-2mdv
 
 %description
 OpenMSX is an open source replacement for the original Transport Tycoon
-Deluxe (TTD) music. It's currently work-in-progress and does not have a huge
-collection of music.
+Deluxe (TTD) music.
 
 %prep
 %setup -q -n %{realname}-%{version}-source
