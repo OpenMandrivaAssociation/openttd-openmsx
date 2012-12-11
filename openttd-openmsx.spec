@@ -41,3 +41,20 @@ rm -rf %{buildroot}
 %defattr(644,root,root,755)
 %doc docs/*.txt
 %{_gamesdatadir}/openttd/gm/%{realname}-%{version}
+
+
+%changelog
+* Tue Aug 10 2010 Jani Välimaa <wally@mandriva.org> 0.3.1-1mdv2011.0
++ Revision: 568319
+- new version 0.3.1
+- fix description and source url
+
+* Fri Jul 16 2010 Jani Välimaa <wally@mandriva.org> 0.3.0-1mdv2011.0
++ Revision: 554355
+- new version 0.3.0
+
+* Tue Apr 13 2010 Jani Välimaa <wally@mandriva.org> 0.2.1-1mdv2010.1
++ Revision: 534622
+- import openttd-openmsx
+
+
