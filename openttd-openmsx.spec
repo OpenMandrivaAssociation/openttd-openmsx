@@ -2,7 +2,7 @@
 
 Name:           openttd-%{realname}
 Version:        0.3.1
-Release:        2
+Release:        3
 Summary:        OpenMSX music replacement set for OpenTTD
 
 Group:          Games/Strategy
