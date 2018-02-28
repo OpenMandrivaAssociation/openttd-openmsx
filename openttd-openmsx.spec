@@ -11,7 +11,7 @@ URL:            http://dev.openttdcoop.org/projects/openmsx
 Source0:        http://bundles.openttdcoop.org/openmsx/releases/%{version}/%{realname}-%{version}-source.tar.gz
 BuildArch:      noarch
 BuildRequires:  dos2unix
-BuildRequires:  python
+BuildRequires:  python2
 Conflicts:      openttd < 1.0.0-2mdv
 
 %description
@@ -20,6 +20,7 @@ Deluxe (TTD) music.
 
 %prep
 %setup -q -n %{realname}-%{version}-source
+sed -ie 's/env python/env python2/' scripts/*.py
 
 %build
 %make
@@ -34,6 +35,5 @@ mkdir -p %{buildroot}%{_gamesdatadir}/openttd/gm
 %make check
 
 %files
-%defattr(644,root,root,755)
 %doc docs/*.txt
 %{_gamesdatadir}/openttd/gm/%{realname}-%{version}
