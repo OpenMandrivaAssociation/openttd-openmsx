@@ -1,0 +1,284 @@
+This is the result of:
+
+  for f in scripts/*py; do expand "$f" >"$f".tmp; mv "$f".tmp "$f"; done
+  2to3 --write --nobackups --no-diffs scripts
+  sed -i -e '1s/python$/python3/' scripts/*.py
+  sed -i -E -e 's/string\.(split|strip|lower)\(([^),]+)\)/\2.\1()/' scripts/*.py
+  sed -i -E -e 's/string\.(split|strip)\(([^,]*), *([^)]*)\)/\2.\1(\3)/' scripts/*.py
+  sed -i -E -e 's/string\.(join|find|split)\(([^,]*), *([^)]*)\)/\2.\1(\3)/' scripts/*.py
+
+Index: openmsx-0.3.1-source/scripts/authorlist.py
+===================================================================
+--- openmsx-0.3.1-source/scripts/authorlist.py
++++ openmsx-0.3.1-source/scripts/authorlist.py	2020-04-19 21:20:49.946758869 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ #
+ # This file is part of the OpenMSX music set for OpenTTD.
+ # OpenMSX is free content; you can redistribute it and/or modify it under the terms of the
+@@ -18,10 +18,10 @@
+     if data != '':
+         # do some processing of the contents of
+         # the data variable
+-        separate = string.split(data,";")
+-        print '%-30s %s' % (separate[1]+":", separate[2])
++        separate = data.split(";")
++        print('%-30s %s' % (separate[1]+":", separate[2]))
+         # end of data processing command group
+-		#        sys.stdout.write(res)
++                #        sys.stdout.write(res)
+     else:
+         sys.stdout.flush()
+         break
+Index: openmsx-0.3.1-source/scripts/md5list.py
+===================================================================
+--- openmsx-0.3.1-source/scripts/md5list.py
++++ openmsx-0.3.1-source/scripts/md5list.py	2020-04-19 21:20:49.947758901 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ #
+ # This file is part of the OpenMSX music set for OpenTTD.
+ # OpenMSX is free content; you can redistribute it and/or modify it under the terms of the
+@@ -18,25 +18,25 @@
+ while 1:
+     data = sys.stdin.readline()
+     if data != '':
+-	# leave out all comment lines (lines starting with '#')
+-	comment_pos = string.find(data,'#')
+-	if comment_pos == 0:
+-		continue
+-	# separate the single entries by ';'
+-	separate = string.split(data,";")
+-	if len(separate) != 4:
+-		continue
+-	systemtype = (os.uname())[0]
+-	if systemtype == 'Linux':
+-		md5call = ["md5sum"]
+-	elif systemtype == 'Darwin':
+-		md5call = ["md5", "-r"]
+-	else:
+-		md5call = ["md5sum"]
+-	md5call = md5call + ["src/"+string.strip(separate[1])]
+-	md5sum = subprocess.Popen(md5call, stdout=subprocess.PIPE).communicate()[0]
+-	md5sum = string.split(md5sum)
+-	res = "%-32s = %s\n" % (separate[1], md5sum[0])
++        # leave out all comment lines (lines starting with '#')
++        comment_pos = data.find('#')
++        if comment_pos == 0:
++                continue
++        # separate the single entries by ';'
++        separate = data.split(";")
++        if len(separate) != 4:
++                continue
++        systemtype = (os.uname())[0]
++        if systemtype == 'Linux':
++                md5call = ["md5sum"]
++        elif systemtype == 'Darwin':
++                md5call = ["md5", "-r"]
++        else:
++                md5call = ["md5sum"]
++        md5call = md5call + ["src/"+separate[1].strip()]
++        md5sum = subprocess.Popen(md5call, stdout=subprocess.PIPE).communicate()[0]
++        md5sum = md5sum.split()
++        res = "%-32s = %s\n" % (separate[1], md5sum[0])
+         sys.stdout.write(res)
+     else:
+         sys.stdout.flush()
+Index: openmsx-0.3.1-source/scripts/midifiles.py
+===================================================================
+--- openmsx-0.3.1-source/scripts/midifiles.py
++++ openmsx-0.3.1-source/scripts/midifiles.py	2020-04-19 21:20:49.947758901 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ #
+ # This file is part of the OpenMSX music set for OpenTTD.
+ # OpenMSX is free content; you can redistribute it and/or modify it under the terms of the
+@@ -17,16 +17,16 @@
+ while 1:
+     data = sys.stdin.readline()
+     if data != '':
+-	# leave out all comment lines (lines starting with '#')
+-	comment_pos = string.find(data,'#')
+-	if comment_pos == 0:
+-		continue
+-	# separate the single entries by ';'
+-        separate = string.split(data,";")
+-	if len(separate) != 4:
+-		continue
+-	res = res + " src/" + string.strip(separate[1])
++        # leave out all comment lines (lines starting with '#')
++        comment_pos = data.find('#')
++        if comment_pos == 0:
++                continue
++        # separate the single entries by ';'
++        separate = data.split(";")
++        if len(separate) != 4:
++                continue
++        res = res + " src/" + separate[1].strip()
+     else:
+-	sys.stdout.write(res)
++        sys.stdout.write(res)
+         sys.stdout.flush()
+         break
+Index: openmsx-0.3.1-source/scripts/namelist.py
+===================================================================
+--- openmsx-0.3.1-source/scripts/namelist.py
++++ openmsx-0.3.1-source/scripts/namelist.py	2020-04-19 21:20:49.948758934 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ #
+ # This file is part of the OpenMSX music set for OpenTTD.
+ # OpenMSX is free content; you can redistribute it and/or modify it under the terms of the
+@@ -16,21 +16,21 @@
+ while 1:
+     data = sys.stdin.readline()
+     if data != '':
+-	# leave out all comment lines (lines starting with '#')
+-	comment_pos = string.find(data,'#')
+-	if comment_pos == 0:
+-		continue
+-	# separate the single entries by ';'
+-        separate = string.split(data,";")
+-	if len(separate) != 4:
+-		continue
+-	res = "%-32s = %s\n" % (separate[1], string.strip(separate[3]))
++        # leave out all comment lines (lines starting with '#')
++        comment_pos = data.find('#')
++        if comment_pos == 0:
++                continue
++        # separate the single entries by ';'
++        separate = data.split(";")
++        if len(separate) != 4:
++                continue
++        res = "%-32s = %s\n" % (separate[1], separate[3].strip())
+         sys.stdout.write(res)
+     else:
+         sys.stdout.flush()
+         break
+ 
+ def authorlist(mystr):
+-	separate = string.split()
+-	for str in separate:
+-		print string.strip(str)
+\ No newline at end of file
++        separate = string.split()
++        for str in separate:
++                print(str.strip())
+\ No newline at end of file
+Index: openmsx-0.3.1-source/scripts/playlist.py
+===================================================================
+--- openmsx-0.3.1-source/scripts/playlist.py
++++ openmsx-0.3.1-source/scripts/playlist.py	2020-04-19 21:20:49.948758934 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ #
+ # This file is part of the OpenMSX music set for OpenTTD.
+ # OpenMSX is free content; you can redistribute it and/or modify it under the terms of the
+@@ -16,25 +16,25 @@
+ while 1:
+     data = sys.stdin.readline()
+     if data != '':
+-	# leave out all comment lines (lines starting with '#')
+-	comment_pos = string.find(data,'#')
+-	if comment_pos == 0:
+-		continue
+-	# separate the single entries by ';'
+-        separate = string.split(data,";")
+-	res = ""
+-	# leave out all lines which don't have the proper number of elements
+-	if len(separate) >= 1:
+-		res = string.strip(separate[0]) + " = "
+-	if len(separate) == 4:
+-		res = res + separate[1]
+-	res = res + "\n"
++        # leave out all comment lines (lines starting with '#')
++        comment_pos = data.find('#')
++        if comment_pos == 0:
++                continue
++        # separate the single entries by ';'
++        separate = data.split(";")
++        res = ""
++        # leave out all lines which don't have the proper number of elements
++        if len(separate) >= 1:
++                res = separate[0].strip() + " = "
++        if len(separate) == 4:
++                res = res + separate[1]
++        res = res + "\n"
+         sys.stdout.write(res)
+     else:
+         sys.stdout.flush()
+         break
+ 
+ def authorlist(mystr):
+-	separate = string.split()
+-	for str in separate:
+-		print string.strip(str)
+\ No newline at end of file
++        separate = string.split()
++        for str in separate:
++                print(str.strip())
+\ No newline at end of file
+Index: openmsx-0.3.1-source/scripts/sanitize_list.py
+===================================================================
+--- openmsx-0.3.1-source/scripts/sanitize_list.py
++++ openmsx-0.3.1-source/scripts/sanitize_list.py	2020-04-19 21:20:49.949758966 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/env python3
+ #
+ # This file is part of the OpenMSX music set for OpenTTD.
+ # OpenMSX is free content; you can redistribute it and/or modify it under the terms of the
+@@ -16,28 +16,28 @@
+ while 1:
+     data = sys.stdin.readline()
+     if data != '':
+-	# leave out all comment lines (lines starting with '#')
+-	comment_pos = string.find(data,'#')
+-	if comment_pos == 0:
+-		continue
+-	# separate the single entries by ';'
+-        separate = string.split(data,";")
+-	if len(separate) != 4:
+-		continue
+-	res = ""
+-	for str in separate:
+-		if res != '':
+-			res = res + ";" + string.strip(str)
+-		else:
+-			res = string.strip(str)
++        # leave out all comment lines (lines starting with '#')
++        comment_pos = data.find('#')
++        if comment_pos == 0:
++                continue
++        # separate the single entries by ';'
++        separate = data.split(";")
++        if len(separate) != 4:
++                continue
++        res = ""
++        for str in separate:
++                if res != '':
++                        res = res + ";" + str.strip()
++                else:
++                        res = str.strip()
+         # end of data processing command group
+-	res = res + "\n"
++        res = res + "\n"
+         sys.stdout.write(res)
+     else:
+         sys.stdout.flush()
+         break
+ 
+ def authorlist(mystr):
+-	separate = string.split()
+-	for str in separate:
+-		print string.strip(str)
+\ No newline at end of file
++        separate = string.split()
++        for str in separate:
++                print(str.strip())
+\ No newline at end of file
