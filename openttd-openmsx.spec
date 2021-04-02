@@ -1,14 +1,14 @@
 %define realname openmsx
 
 Name:           openttd-%{realname}
-Version:        0.3.1
-Release:        4
+Version:        0.4.0
+Release:        1
 Summary:        OpenMSX music replacement set for OpenTTD
 
 Group:          Games/Strategy
 License:        GPLv2
 URL:            http://dev.openttdcoop.org/projects/openmsx
-Source0:        http://bundles.openttdcoop.org/openmsx/releases/%{version}/%{realname}-%{version}-source.tar.gz
+Source0:        https://cdn.openttd.org/openmsx-releases/%{version}/openmsx-%{version}-source.tar.xz
 # Mirror:
 #Source0:        https://github.com/OpenTTD/OpenMSX/archive/%{version}/%{realname}-%{version}-source.tar.gz
 Patch0:         openmsx-0.3.1-python3.patch
