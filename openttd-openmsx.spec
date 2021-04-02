@@ -11,7 +11,7 @@ URL:            http://dev.openttdcoop.org/projects/openmsx
 Source0:        https://cdn.openttd.org/openmsx-releases/%{version}/openmsx-%{version}-source.tar.xz
 # Mirror:
 #Source0:        https://github.com/OpenTTD/OpenMSX/archive/%{version}/%{realname}-%{version}-source.tar.gz
-Patch0:         openmsx-0.3.1-python3.patch
+#Patch0:         openmsx-0.3.1-python3.patch
 
 BuildArch:      noarch
 BuildRequires:  dos2unix
