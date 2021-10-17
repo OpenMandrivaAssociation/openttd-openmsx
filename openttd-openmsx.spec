@@ -33,4 +33,4 @@ mkdir -p %{buildroot}%{_gamesdatadir}/openttd/gm
 
 %files
 %doc docs/*.txt
-@{_datadir}/games/openttd/gm/openmsx-%{version}.tar
+#{_datadir}/games/openttd/gm/openmsx-%{version}.tar
