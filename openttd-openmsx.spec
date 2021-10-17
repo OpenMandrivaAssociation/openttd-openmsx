@@ -1,7 +1,7 @@
 %define realname openmsx
 
 Name:           openttd-%{realname}
-Version:        0.4.0
+Version:        0.4.2
 Release:        1
 Summary:        OpenMSX music replacement set for OpenTTD
 
