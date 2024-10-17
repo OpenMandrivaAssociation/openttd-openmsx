@@ -7,7 +7,7 @@ Summary:        OpenMSX music replacement set for OpenTTD
 
 Group:          Games/Strategy
 License:        GPLv2
-URL:            http://dev.openttdcoop.org/projects/openmsx
+URL:            https://dev.openttdcoop.org/projects/openmsx
 Source0:        https://cdn.openttd.org/openmsx-releases/%{version}/openmsx-%{version}-source.tar.xz
 # Mirror:
 #Source0:        https://github.com/OpenTTD/OpenMSX/archive/%{version}/%{realname}-%{version}-source.tar.gz
