@@ -14,6 +14,7 @@ Source0:        https://cdn.openttd.org/openmsx-releases/%{version}/openmsx-%{ve
 #Patch0:         openmsx-0.3.1-python3.patch
 
 BuildArch:      noarch
+BuildRequires:	make
 BuildRequires:  dos2unix
 BuildRequires:  python
 
